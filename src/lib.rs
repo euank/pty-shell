@@ -36,7 +36,7 @@ pub trait PtyHandler {
 
 pub trait PtyShell {
     fn exec<S: AsRef<str>>(&self, shell: S) -> Result<()>;
-    fn proxy<H: PtyHandler>(&self, handler: H) -> Result<()>;
+    fn proxy<H: PtyHandler + 'static>(&self, handler: H) -> Result<()>;
 }
 
 impl PtyShell for tty::Fork {
